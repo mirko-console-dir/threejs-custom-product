@@ -10,7 +10,7 @@ import state from "../store";
 const Shirt = () => {
   const snap = useSnapshot(state);
   /* import the 3d model FILE */
-  const { nodes, materials } = useGLTF("/shirt_baked.glb");
+  const { nodes, materials } = useGLTF("./shirt_baked.glb");
   /* texture for the 3d image */
   const logoTexture = useTexture(snap.logoDecal);
   const fullTexture = useTexture(snap.fullDecal);
