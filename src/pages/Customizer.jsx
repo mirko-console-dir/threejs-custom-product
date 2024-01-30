@@ -51,6 +51,12 @@ const Customizer = () => {
     }
   };
   /* for AI Picker */
+  const [modalMessage, setModalMessage] = useState(false)
+  const handleSeeCode = () => {
+    const githubLink = 'https://github.com/mirko-console-dir/threejs-3D-customisation';
+    window.open(githubLink, '_blank');
+    setModalMessage(false)
+  }
   const handleSubmit = async (type) => {
     if (!prompt) return alert("Please enter a prompt");
 
@@ -72,8 +78,10 @@ const Customizer = () => {
       const data = await response.json();
 
       handleDecals(type, `data:image/png;base64,${data.photo}`);
+      
     } catch (error) {
-      alert(error);
+      //alert(error);
+      setModalMessage(true)
     } finally {
       setGeneratingImg(false);
       setActiveEditorTab("");
@@ -160,7 +168,32 @@ const Customizer = () => {
               customStyles="w-fit px-4 py-2.5 font-bold text-sm"
             />
           </motion.div>
-
+          {/* TO SHOW THE MESSAGE MODAL */}
+          {modalMessage &&
+            <motion.div
+              className="absolute z-20 flex"
+              style={{top: '50%', left: '50%',background: '#e0e0e0', border: '1px solid #e0e0e0', borderRadius: 10, transform: 'translate(-50%,-50%)', padding: 20, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxShadow: '0 2px 30px 0 rgba(31, 38, 135, 0.07)'}}
+              {...fadeAnimation}
+            >
+              <p style={{margin: 50, textAlign: 'center'}}>All of OpenAI&#39;s credits have been exhausted. If you&#39;re curious, you can view the code on GitHub or continue to enjoy the app.</p>
+              <div className="flex gap-10" 
+              >
+                <CustomButton
+                  type="filled"
+                  title="See The Code"
+                  handleClick={handleSeeCode}
+                  customStyles="w-fit px-4 py-2.5 font-bold text-sm"
+                />
+                <CustomButton
+                  type="filled"
+                  title="Continue Customize"
+                  handleClick={()=>setModalMessage(false)}
+                  customStyles="w-fit px-4 py-2.5 font-bold text-sm"
+                />
+              </div>
+            </motion.div>
+          }
+          {/* END TO SHOW THE MESSAGE MODAL */}
           <motion.div
             className="filtertabs-container"
             {...slideAnimation("up")}
