@@ -1,9 +1,14 @@
 import CustomButton from "./CustomButton";
 import PropTypes from "prop-types";
 
-const AiPicker = ({ prompt, setPrompt, generatingImg, handleSubmit }) => {
+const AiPicker = ({ prompt, setPrompt, generatingImg, handleSubmit, close }) => {
   return (
     <div className="aipicker-container">
+      <div className="flex justify-end absolute -top-7 right-0">
+        <button onClick={close}> 
+          <p className="close__btn">Close</p>
+        </button>
+      </div>
       <textarea
         placeholder="Ask AI..."
         rows={5}
@@ -45,5 +50,6 @@ AiPicker.propTypes = {
   setPrompt: PropTypes.any,
   generatingImg: PropTypes.any,
   handleSubmit: PropTypes.any,
+  close: PropTypes.func.isRequired,
 };
 export default AiPicker;

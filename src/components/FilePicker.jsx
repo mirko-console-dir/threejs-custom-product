@@ -1,11 +1,14 @@
-import React from "react";
-
 import CustomButton from "./CustomButton";
 import PropTypes from "prop-types";
 
-const FilePicker = ({ file, setFile, readFile }) => {
+const FilePicker = ({ file, setFile, readFile, close}) => {
   return (
     <div className="filepicker-container">
+      <div className="flex justify-end absolute -top-7 right-0">
+        <button onClick={close}> 
+          <p className="close__btn">Close</p>
+        </button>
+      </div>
       <div className="flex-1 flex flex-col">
         <input
           id="file-upload"
@@ -44,5 +47,7 @@ FilePicker.propTypes = {
   file: PropTypes.any,
   setFile: PropTypes.any,
   readFile: PropTypes.any,
+  close: PropTypes.func.isRequired,
+
 };
 export default FilePicker;
